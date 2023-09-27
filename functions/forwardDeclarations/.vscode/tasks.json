@@ -1,0 +1,81 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++11",       // set C++ language standard
+                "-pedantic-errors", // turn off compiler extensions
+                "-Wall",            // turn on most warnings
+                "-Weffc++",         // turn on warnings related to Effective C++ coding style (by Scott Meyers)
+                "-Wextra",          // turn on warnings not covered by -Wall
+                "-Wconversion",     // turn on warnings related to data loss in type conversions
+                "-Wsign-conversion",// turn on warnings related to conversions that change sign of type
+                "-Werror",          // treat warnings as errors
+                "-g",               // include debug info in build
+                "-o",
+                "forwardDeclaration.tsk",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "focus": false
+
+            },
+            "problemMatcher": {
+                "owner": "cpp",
+                "fileLocation": ["relative", "${workspaceFolder}"],
+                "pattern": {
+                    "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+                    "file": 1,
+                    "line": 2,
+                    "column": 3,
+                    "severity": 4,
+                    "message": 5
+                }
+            }
+        },
+        {
+            "label": "build-release",
+            "type": "shell",
+            "command": "g++",
+            "args": [
+                "-std=c++11",       // set C++ language standard
+                "-pedantic-errors", // turn off compiler extensions
+                "-Wall",            // turn on most warnings
+                "-Weffc++",         // turn on warnings related to Effective C++ coding style (by Scott Meyers)
+                "-Wextra",          // turn on warnings not covered by -Wall
+                "-Wconversion",     // turn on warnings related to data loss in type conversions
+                "-Wsign-conversion",// turn on warnings related to conversions that change sign of type
+                "-Werror",          // treat warnings as errors
+                "-O3",              // Optimization level 3 (high optimization)
+                "-DNDEBUG",         // Turn off debugging related lines by defining NDEBUG
+                "-o",
+                "forwardDeclaration.tsk",
+                "${file}"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "run",
+            "type": "shell",
+            "command": "./forwardDeclaration.tsk",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always"
+            }
+        }
+    ]
+}
